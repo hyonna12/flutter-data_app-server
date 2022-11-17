@@ -34,11 +34,12 @@ public class ProductController {
 
   @PostMapping("/api/product")
   public ResponseDto<?> insert(@RequestBody Product product) {
+    product.setId(null);
     return new ResponseDto<>(1, "추가 성공", productRepository.save(product));
   }
 
   @PutMapping("/api/product/{id}")
-  public ResponseDto<?> updateById(@PathVariable Integer id, Product product) {
+  public ResponseDto<?> updateById(@PathVariable Integer id, @RequestBody Product product) {
     product.setId(id);
     return new ResponseDto<>(1, "수정 성공", productRepository.save(product));
   }
